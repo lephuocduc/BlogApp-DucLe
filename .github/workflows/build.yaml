@@ -16,7 +16,7 @@ jobs:
         id: login
         run: echo "Docker User ${{ secrets.DOCKER_USER }}" # This is for debug only; avoid exposing secrets in actual logs!
       - name: Login to Docker Hub
-        id: login
+        id: login2
         run: echo "Docker User ${{ secrets.DOCKER_PASSWORD }}" # This is for debug only; avoid exposing secrets in actual logs!
       - name: Login to Docker Hub
         id: login
