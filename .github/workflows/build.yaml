@@ -12,21 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
       - name: Login to Docker Hub
         id: login
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
-      
+        run: docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
       - name: Build the Docker image
         id: build
-        run: |
-          IMAGE_TAG="${{ secrets.DOCKER_USER }}/mdo-posts:$(git rev-parse --short "$GITHUB_SHA")"
-          echo "Building image with tag $IMAGE_TAG"
-          docker build . --file Dockerfile --tag "$IMAGE_TAG"
-      
+        run: docker build . --file Dockerfile --tag "${{ secrets.DOCKER_USER }}"/BlogApp-DucLe:$(git rev-parse --short "$GITHUB_SHA")
       - name: Push the Docker image
         id: push
-        run: |
-          IMAGE_TAG="${{ secrets.DOCKER_USER }}/mdo-posts:$(git rev-parse --short "$GITHUB_SHA")"
-          echo "Pushing image with tag $IMAGE_TAG"
-          docker push "$IMAGE_TAG"
+        run: docker push "${{ secrets.DOCKER_USER }}"/BlogApp-DucLe:$(git rev-parse --short "$GITHUB_SHA")
