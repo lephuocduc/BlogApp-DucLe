@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Login to Docker Hub
-        id: login
+        id: login1
         run: echo "Docker User ${{ secrets.DOCKER_USER }}" # This is for debug only; avoid exposing secrets in actual logs!
       - name: Login to Docker Hub
         id: login2
