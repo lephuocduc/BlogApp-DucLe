@@ -1,11 +1,17 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim
 
 # Set environment variables for Flask
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Install necessary packages including OpenSSL development libraries
-RUN apk add --no-cache openssl-dev gcc musl-dev linux-headers
+RUN apt-get update && apt-get install -y \
+    openssl \
+    libssl-dev \
+    gcc \
+    musl-dev \
+    linux-headers \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file and install dependencies
 COPY requirements.txt requirements.txt
