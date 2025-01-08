@@ -1,4 +1,5 @@
 FROM python:3.8-slim
+# Set environment variables for Flask
 
 # Set environment variables for Flask
 ENV FLASK_APP=app.py
